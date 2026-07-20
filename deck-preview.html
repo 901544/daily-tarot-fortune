@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>牌堆效果示意图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(180deg, #0D0A14 0%, #1A1028 30%, #2D1B4E 60%, #4A2C6D 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+    }
+    
+    h1 {
+      color: #F5F5F5;
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-shadow: 0 0 20px rgba(245, 245, 245, 0.3);
+    }
+    
+    .preview-container {
+      display: flex;
+      gap: 80px;
+      align-items: center;
+    }
+    
+    .deck-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .deck-title {
+      color: #C0C0C0;
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .deck-container {
+      position: relative;
+      width: 200px;
+      height: 280px;
+      cursor: pointer;
+    }
+    
+    .card {
+      position: absolute;
+      width: 144px;
+      height: 208px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .card-back-silver {
+      position: relative;
+      background: #000000;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    
+    .card-back-silver::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 3px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #E8E8E8 25%, #C0C0C0 50%, #A8A8A8 75%, #808080 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    
+    .card-back-silver::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 5px;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      pointer-events: none;
+    }
+    
+    .card-back-silver-inner {
+      position: absolute;
+      inset: 4px;
+      border-radius: 4px;
+      background-image: url("./src/images/pattern_bright_silver.png");
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+    
+    .card-back-gold {
+      position: relative;
+      background: #000000;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    
+    .card-back-gold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 3px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #E8E8E8 25%, #C0C0C0 50%, #A8A8A8 75%, #808080 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    
+    .card-back-gold::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 5px;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      pointer-events: none;
+    }
+    
+    .card-back-gold-inner {
+      position: absolute;
+      inset: 4px;
+      border-radius: 4px;
+      background-image: url("./src/images/paisley_bright_silver.png");
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+    
+    .card-1 { bottom: 0; right: 0; }
+    .card-2 { bottom: 2px; right: 2px; transform: translate(-4px, -4px); }
+    .card-3 { bottom: 4px; right: 4px; transform: translate(-8px, -8px); }
+    .card-4 { bottom: 6px; right: 6px; transform: translate(-12px, -12px); }
+    .card-5 { bottom: 8px; right: 8px; transform: translate(-16px, -16px); }
+    .card-6 { bottom: 10px; right: 10px; transform: translate(-20px, -20px); }
+    .card-7 { bottom: 12px; right: 12px; transform: translate(-24px, -24px); opacity: 0.9; }
+    .card-8 { bottom: 14px; right: 14px; transform: translate(-28px, -28px); opacity: 0.8; }
+    
+    .deck-container:hover .card-2 { transform: translate(-6px, -6px); }
+    .deck-container:hover .card-3 { transform: translate(-12px, -12px); }
+    .deck-container:hover .card-4 { transform: translate(-18px, -18px); }
+    .deck-container:hover .card-5 { transform: translate(-24px, -24px); }
+    .deck-container:hover .card-6 { transform: translate(-30px, -30px); }
+    .deck-container:hover .card-7 { transform: translate(-36px, -36px); }
+    .deck-container:hover .card-8 { transform: translate(-42px, -42px); }
+    
+    .description {
+      margin-top: 40px;
+      color: #E0E0E0;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+    
+    .description strong {
+      color: #D4AF37;
+    }
+  </style>
+</head>
+<body>
+  <h1>牌堆效果示意图</h1>
+  
+  <div class="preview-container">
+    <div class="deck-wrapper">
+      <div class="deck-title">效果一：银色花纹</div>
+      <div class="deck-container">
+        <div class="card card-back-silver card-8"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-7"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-6"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-5"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-4"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-3"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-2"><div class="card-back-silver-inner"></div></div>
+        <div class="card card-back-silver card-1"><div class="card-back-silver-inner"></div></div>
+      </div>
+    </div>
+    
+    <div class="deck-wrapper">
+      <div class="deck-title">效果二：金色花纹</div>
+      <div class="deck-container">
+        <div class="card card-back-gold card-8"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-7"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-6"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-5"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-4"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-3"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-2"><div class="card-back-gold-inner"></div></div>
+        <div class="card card-back-gold card-1"><div class="card-back-gold-inner"></div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="description">
+    <p>两种效果均采用<strong>低饱和度银色牌底</strong>（深灰渐变），配合不同颜色的花纹：</p>
+    <p><strong>效果一</strong>：银色藤蔓花朵花纹（提取自青花瓷风格图案）</p>
+    <p><strong>效果二</strong>：金色藤蔓花朵花纹（提取自欧式金色图案）</p>
+    <p>牌堆保持左上角延伸展开的堆叠效果，悬停时展开幅度更大</p>
+  </div>
+</body>
+</html>
