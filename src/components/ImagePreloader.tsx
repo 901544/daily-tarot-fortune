@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { tarotCards } from '../data/tarotCards';
 import { getTarotCardImageUrl } from '../utils/tarotImages';
+
+const PRELOAD_TIMEOUT_MS = 8000; // 最多等待8秒
 
 export const ImagePreloader = () => {
   const [loaded, setLoaded] = useState(false);
@@ -16,9 +18,15 @@ export const ImagePreloader = () => {
       });
     });
 
+    // 超时保护：即使图片没加载完也显示页面
+    const timeout = setTimeout(() => setLoaded(true), PRELOAD_TIMEOUT_MS);
+
     Promise.all(promises).then(() => {
+      clearTimeout(timeout);
       setLoaded(true);
     });
+
+    return () => clearTimeout(timeout);
   }, []);
 
   if (!loaded) {
