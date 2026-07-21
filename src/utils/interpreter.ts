@@ -99,7 +99,8 @@ export const generateInterpretation = (card: TarotCard, zodiac: ZodiacSign, isRe
   const cardInterpretation = isReversed ? card.reversedInterpretation : card.interpretation;
   const reversedText = isReversed ? '（逆位）' : '';
   
-  let interpretation = `${elementMsg}。${card.name}${reversedText}象征${keyword}，${cardInterpretation}。【${topicData.title}方面】${randomMessage}。${cautionMsg}。`;
+  const cardInterpretationClean = cardInterpretation.replace(/。$/, '');
+  let interpretation = `${elementMsg}。${card.name}${reversedText}象征${keyword}，${cardInterpretationClean}。【${topicData.title}方面】${randomMessage}。${cautionMsg}。`;
   
   if (interpretation.length > 300) {
     interpretation = interpretation.substring(0, 297) + '...';
