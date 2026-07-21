@@ -1,5 +1,5 @@
 import { TarotCard } from '../data/tarotCards';
-import { getTarotCardImageUrl } from '../utils/tarotImages';
+import { getTarotCardImageUrl, getTarotCardImageUrlFallback } from '../utils/tarotImages';
 
 interface TarotCardFrontProps {
   card: TarotCard;
@@ -8,6 +8,7 @@ interface TarotCardFrontProps {
 
 export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps) => {
   const imageUrl = getTarotCardImageUrl(card);
+  const fallbackUrl = getTarotCardImageUrlFallback(card);
 
   return (
     <div 
@@ -25,30 +26,34 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
       <div className="flex-1 flex items-center justify-center overflow-hidden relative">
         <div style={{ transform: isReversed ? 'rotate(180deg)' : 'none', width: '100%', height: '100%' }}>
           {imageUrl ? (
-            <img
-              src={imageUrl}
-              alt={card.name}
-              className="w-full h-full object-cover"
-              loading="lazy"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                console.error('[塔罗牌图片加载失败]', {
-                  cardName: card.name,
-                  cardId: card.id,
-                  imageUrl: imageUrl,
-                  userAgent: navigator.userAgent,
-                  screenWidth: window.innerWidth,
-                  screenHeight: window.innerHeight,
-                });
-                target.style.display = 'none';
-              }}
-              onLoad={() => {
-                console.log('[塔罗牌图片加载成功]', {
-                  cardName: card.name,
-                  imageUrl: imageUrl,
-                });
-              }}
-            />
+            <picture>
+              <source srcSet={imageUrl} type="image/webp" />
+              <img
+                src={fallbackUrl}
+                alt={card.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  console.error('[塔罗牌图片加载失败]', {
+                    cardName: card.name,
+                    cardId: card.id,
+                    imageUrl: imageUrl,
+                    fallbackUrl: fallbackUrl,
+                    userAgent: navigator.userAgent,
+                    screenWidth: window.innerWidth,
+                    screenHeight: window.innerHeight,
+                  });
+                  target.style.display = 'none';
+                }}
+                onLoad={() => {
+                  console.log('[塔罗牌图片加载成功]', {
+                    cardName: card.name,
+                    imageUrl: imageUrl,
+                  });
+                }}
+              />
+            </picture>
           ) : (
             <div 
               className="w-full h-full flex items-center justify-center text-6xl text-white/50"

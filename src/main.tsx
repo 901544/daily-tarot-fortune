@@ -15,8 +15,8 @@ console.log('[应用初始化]', {
 })
 
 const testImagePaths = [
-  '/images/tarot/00-TheFool.png',
-  '/images/pattern_bright_silver.png',
+  '/images/tarot/00-TheFool.webp',
+  '/images/pattern_bright_silver.webp',
 ]
 
 testImagePaths.forEach((path) => {

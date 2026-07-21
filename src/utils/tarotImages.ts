@@ -41,6 +41,19 @@ export const getTarotCardImageUrl = (card: TarotCard): string => {
   if (card.type === 'major') {
     const filename = majorArcanaMap[card.name];
     if (filename) {
+      return `/images/tarot/${filename.replace('.png', '.webp')}`;
+    }
+  } else if (card.number) {
+    const filename = getMinorArcanaFileName(card.type, card.number);
+    return `/images/tarot/${filename.replace('.png', '.webp')}`;
+  }
+  return '';
+};
+
+export const getTarotCardImageUrlFallback = (card: TarotCard): string => {
+  if (card.type === 'major') {
+    const filename = majorArcanaMap[card.name];
+    if (filename) {
       return `/images/tarot/${filename}`;
     }
   } else if (card.number) {
