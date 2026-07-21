@@ -63,3 +63,4 @@ src/
 
 - **构建命令**: `npm run build`
 - **输出目录**: `dist`
+   
