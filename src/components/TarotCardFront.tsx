@@ -30,6 +30,24 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
               alt={card.name}
               className="w-full h-full object-cover"
               loading="lazy"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                console.error('[塔罗牌图片加载失败]', {
+                  cardName: card.name,
+                  cardId: card.id,
+                  imageUrl: imageUrl,
+                  userAgent: navigator.userAgent,
+                  screenWidth: window.innerWidth,
+                  screenHeight: window.innerHeight,
+                });
+                target.style.display = 'none';
+              }}
+              onLoad={() => {
+                console.log('[塔罗牌图片加载成功]', {
+                  cardName: card.name,
+                  imageUrl: imageUrl,
+                });
+              }}
             />
           ) : (
             <div 
