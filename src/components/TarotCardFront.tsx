@@ -23,7 +23,7 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
       />
       
       <div className="flex-1 flex items-center justify-center overflow-hidden relative">
-        <div style={{ transform: isReversed ? 'rotate(180deg)' : 'none' }}>
+        <div style={{ transform: isReversed ? 'rotate(180deg)' : 'none', width: '100%', height: '100%' }}>
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -33,7 +33,8 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
             />
           ) : (
             <div 
-              className="text-6xl text-white/50"
+              className="w-full h-full flex items-center justify-center text-6xl text-white/50"
+              style={{ backgroundColor: `${card.color}20` }}
             >
               {card.type === 'major' ? '☽' : 
                card.type === 'wands' ? '🔥' : 

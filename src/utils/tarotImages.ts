@@ -1,7 +1,5 @@
 import { TarotCard } from '../data/tarotCards';
 
-const CDN_BASE = 'https://cdn.jsdelivr.net/npm/@cometpisces/tarot-kit-images@0.2.0/images';
-
 const majorArcanaMap: Record<string, string> = {
   '愚者': '00-TheFool.png',
   '魔术师': '01-TheMagician.png',
@@ -43,11 +41,11 @@ export const getTarotCardImageUrl = (card: TarotCard): string => {
   if (card.type === 'major') {
     const filename = majorArcanaMap[card.name];
     if (filename) {
-      return `${CDN_BASE}/${filename}`;
+      return `/images/tarot/${filename}`;
     }
   } else if (card.number) {
     const filename = getMinorArcanaFileName(card.type, card.number);
-    return `${CDN_BASE}/${filename}`;
+    return `/images/tarot/${filename}`;
   }
   return '';
 };
