@@ -7,7 +7,7 @@ import { TarotCardFront } from './TarotCardFront';
 import patternBrightSilver from '../images/pattern_bright_silver.png';
 
 export const TarotDeck = () => {
-  const { selectedZodiac, drawnCard, isDrawing, drawCard, startDrawing, reset } = useTarotStore();
+  const { selectedZodiac, drawnCard, isReversed, isDrawing, drawCard, startDrawing, reset } = useTarotStore();
 
   const handleDrawCard = () => {
     if (!selectedZodiac || isDrawing || drawnCard) return;
@@ -16,9 +16,9 @@ export const TarotDeck = () => {
     startDrawing();
     
     setTimeout(() => {
-      const card = drawRandomCard();
-      const interpretation = generateInterpretation(card, selectedZodiac);
-      drawCard(card, interpretation);
+      const result = drawRandomCard();
+      const interpretation = generateInterpretation(result.card, selectedZodiac, result.isReversed);
+      drawCard(result.card, result.isReversed, interpretation);
     }, 1500);
   };
 
@@ -134,7 +134,7 @@ export const TarotDeck = () => {
             transition={{ type: 'spring', stiffness: 100, damping: 15 }}
             className="relative z-10"
           >
-            <TarotCardFront card={drawnCard} />
+            <TarotCardFront card={drawnCard} isReversed={isReversed} />
             
             <motion.button
               className="mt-6 w-36 px-6 py-2 rounded-lg text-white font-medium"

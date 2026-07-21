@@ -3,9 +3,10 @@ import { getTarotCardImageUrl } from '../utils/tarotImages';
 
 interface TarotCardFrontProps {
   card: TarotCard;
+  isReversed?: boolean;
 }
 
-export const TarotCardFront = ({ card }: TarotCardFrontProps) => {
+export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps) => {
   const imageUrl = getTarotCardImageUrl(card);
 
   return (
@@ -22,29 +23,39 @@ export const TarotCardFront = ({ card }: TarotCardFrontProps) => {
       />
       
       <div className="flex-1 flex items-center justify-center overflow-hidden relative">
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            alt={card.name}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        ) : (
-          <div 
-            className="text-6xl text-white/50"
-          >
-            {card.type === 'major' ? '☽' : 
-             card.type === 'wands' ? '🔥' : 
-             card.type === 'cups' ? '💧' : 
-             card.type === 'swords' ? '⚔️' : '⭐'}
-          </div>
-        )}
+        <div style={{ transform: isReversed ? 'rotate(180deg)' : 'none' }}>
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={card.name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <div 
+              className="text-6xl text-white/50"
+            >
+              {card.type === 'major' ? '☽' : 
+               card.type === 'wands' ? '🔥' : 
+               card.type === 'cups' ? '💧' : 
+               card.type === 'swords' ? '⚔️' : '⭐'}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent z-20">
         <h3 className="text-white font-bold text-sm text-center">{card.name}</h3>
         <p className="text-purple-300 text-xs text-center">{card.nameEn}</p>
       </div>
+
+      {isReversed && (
+        <div 
+          className="absolute top-2 right-2 px-2 py-1 rounded text-xs font-bold text-red-400 bg-black/50 z-20"
+        >
+          逆位
+        </div>
+      )}
 
       <div 
         className="absolute inset-0 rounded-lg pointer-events-none z-30"

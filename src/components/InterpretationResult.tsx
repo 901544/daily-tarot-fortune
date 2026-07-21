@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTarotStore } from '../stores/tarotStore';
 
 export const InterpretationResult = () => {
-  const { drawnCard, selectedZodiac, interpretation } = useTarotStore();
+  const { drawnCard, selectedZodiac, interpretation, isReversed } = useTarotStore();
 
   if (!drawnCard || !selectedZodiac || !interpretation) return null;
 
@@ -43,6 +43,7 @@ export const InterpretationResult = () => {
           <div className="mb-4">
             <h4 className="text-yellow-500 font-medium text-sm mb-2">
               今日抽到：{drawnCard.name}
+              {isReversed && <span className="ml-2 text-red-400">（逆位）</span>}
             </h4>
             <div className="flex gap-2 flex-wrap">
               {drawnCard.keywords.map((keyword, index) => (
@@ -61,7 +62,7 @@ export const InterpretationResult = () => {
           </div>
 
           <div className="relative">
-            <div className="text-purple-200 text-center leading-relaxed">
+            <div className="text-purple-200 text-left leading-relaxed">
               <p className="text-lg">{interpretation}</p>
             </div>
           </div>
