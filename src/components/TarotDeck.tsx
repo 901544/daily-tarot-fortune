@@ -4,7 +4,7 @@ import { drawRandomCard } from '../data/tarotCards';
 import { generateInterpretation } from '../utils/interpreter';
 import { CardTable } from './CardTable';
 import { TarotCardFront } from './TarotCardFront';
-import patternBrightSilver from '../images/pattern_bright_silver.png';
+const patternBrightSilver = '/images/pattern_bright_silver.png';
 
 export const TarotDeck = () => {
   const { selectedZodiac, drawnCard, isReversed, isDrawing, drawCard, startDrawing, reset } = useTarotStore();
