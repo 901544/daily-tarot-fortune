@@ -49,8 +49,10 @@ export const ZodiacCard = ({ zodiac, isSelected, onClick }: ZodiacCardProps) => 
             />
           </div>
           
-          <span className="text-white text-base font-medium mt-1">{zodiac.name}</span>
-          <span className="text-purple-300 text-xs">{zodiac.dateRange}</span>
+          <div style={{ transform: 'translateY(-5px)' }} className="flex flex-col items-center">
+            <span className="text-white text-base font-medium">{zodiac.name}</span>
+            <span className="text-purple-300 text-xs">{zodiac.dateRange}</span>
+          </div>
         </div>
 
         {isSelected && (
