@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 
 @font-face {
   font-family: 'ShangTuDongGuan';
-  src: url('./fonts/上图东观体-常规.ttf') format('truetype');
+  src: url('./fonts/上图东观体-常规-subset.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

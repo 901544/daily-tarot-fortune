@@ -1,7 +1,7 @@
 ﻿import { motion, AnimatePresence } from 'framer-motion';
 import { useTarotStore } from '../stores/tarotStore';
 import { drawRandomCard } from '../data/tarotCards';
-import { generateInterpretationAI } from '../utils/interpreter';
+import { generateInterpretation } from '../utils/interpreter';
 import { CardTable } from './CardTable';
 import { TarotCardFront } from './TarotCardFront';
 import { cardBackPattern } from '../assets/cardBack';
@@ -16,10 +16,10 @@ export const TarotDeck = () => {
     startDrawing();
     
     const result = drawRandomCard();
-    const interpretationPromise = generateInterpretationAI(result.card, selectedZodiac, result.isReversed);
     
-    setTimeout(async () => {
-      const interpretation = await interpretationPromise;
+    // 立即使用内置解牌，不等待
+    setTimeout(() => {
+      const interpretation = generateInterpretation(result.card, selectedZodiac, result.isReversed);
       drawCard(result.card, result.isReversed, interpretation);
     }, 800);
   };
@@ -130,13 +130,20 @@ export const TarotDeck = () => {
         ) : (
           <motion.div
             key="drawn-card"
-            initial={{ opacity: 0, y: -100, rotate: -180 }}
-            animate={{ opacity: 1, y: 0, rotate: 0 }}
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
             transition={{ type: 'spring', stiffness: 100, damping: 15 }}
             className="relative z-10"
           >
-            <TarotCardFront card={drawnCard} isReversed={isReversed} />
+            <motion.div
+              style={{ transformStyle: 'preserve-3d' }}
+              initial={{ rotateY: 180 }}
+              animate={{ rotateY: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <TarotCardFront card={drawnCard} isReversed={isReversed} />
+            </motion.div>
             
             <motion.button
               className="mt-6 px-6 py-2 rounded-lg text-white font-medium"
