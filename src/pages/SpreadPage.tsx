@@ -20,7 +20,7 @@ const spreadTypes = [
     subtitle: 'Celtic Cross',
     description: '经典的凯尔特十字牌阵，从多个维度深入剖析问题，揭示隐藏的真相。',
     icon: '✚',
-    cardCount: 10,
+    cardCount: 5,
     path: '/spread/cross',
   },
   {

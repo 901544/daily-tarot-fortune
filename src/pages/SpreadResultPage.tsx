@@ -121,17 +121,40 @@ export default function SpreadResultPage() {
 
         {/* 抽到的牌展示 */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
+          className={state.type === 'cross' ? 'mb-10 mx-auto' : 'flex flex-wrap justify-center gap-4 mb-10'}
+          style={state.type === 'cross' ? {
+            display: 'grid',
+            gridTemplateColumns: '140px 140px 140px',
+            gridTemplateRows: 'auto auto auto',
+            gridTemplateAreas: '". top ." "left center right" ". bottom ."',
+            gap: '12px',
+            justifyItems: 'center',
+            alignItems: 'center',
+            maxWidth: '460px',
+          } : undefined}
         >
-          {state.cards.map((dc, i) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <span className="text-xs text-yellow-400">{state.positions[i]}</span>
-              <TarotCardFront card={dc.card} isReversed={dc.isReversed} />
-            </div>
-          ))}
+          {state.type === 'cross' ? (
+            <>
+              {[3, 1, 0, 2, 4].map((idx) => (
+                <div key={idx} className="flex flex-col items-center gap-1" style={{
+                  gridArea: ['bottom', 'left', 'center', 'right', 'top'][idx]
+                }}>
+                  <span className="text-xs text-yellow-400 text-center leading-tight max-w-[120px]">{state.positions[idx]}</span>
+                  <TarotCardFront card={state.cards[idx]?.card} isReversed={state.cards[idx]?.isReversed} />
+                </div>
+              ))}
+            </>
+          ) : (
+            state.cards.map((dc, i) => (
+              <div key={i} className="flex flex-col items-center gap-1">
+                <span className="text-xs text-yellow-400">{state.positions[i]}</span>
+                <TarotCardFront card={dc.card} isReversed={dc.isReversed} />
+              </div>
+            ))
+          )}
         </motion.div>
 
         {/* 解读内容 */}

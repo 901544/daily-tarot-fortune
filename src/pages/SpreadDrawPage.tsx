@@ -16,8 +16,8 @@ const spreadConfig: Record<string, { title: string; cardCount: number; positions
   },
   'cross': {
     title: '十字牌阵',
-    cardCount: 10,
-    positions: ['现状', '障碍', '潜意识', '过去', '可能性', '近未来', '自我态度', '外界影响', '希望与恐惧', '最终结果'],
+    cardCount: 5,
+    positions: ['问题的核心与当前状况', '阻碍因素与需要面对的挑战', '助力因素与可用的资源', '灵性指引与更高视角', '实际建议与行动方向'],
   },
   'yes-no': {
     title: 'Yes or No',
@@ -82,6 +82,87 @@ export default function SpreadDrawPage() {
     });
   };
 
+  // Cross layout positions for CSS grid
+  const crossGridPositions: Record<number, { gridArea: string }> = {
+    0: { gridArea: 'center' },  // center
+    1: { gridArea: 'left' },    // left
+    2: { gridArea: 'right' },   // right
+    3: { gridArea: 'top' },     // top
+    4: { gridArea: 'bottom' },  // bottom
+  };
+
+  const renderCard = (i: number) => {
+    const drawn = drawnCards[i];
+    const isNext = i === currentIndex && allDrawn && !allComplete;
+    const isPending = i > currentIndex && allDrawn && !drawn;
+
+    return (
+      <div
+        key={i}
+        className="flex flex-col items-center gap-1"
+        style={type === 'cross' ? crossGridPositions[i] : undefined}
+      >
+        <span className="text-xs text-purple-300 text-center leading-tight max-w-[120px]">{config.positions[i]}</span>
+
+        <AnimatePresence mode="wait">
+          {drawn ? (
+            <motion.div
+              key="front"
+              initial={{ rotateY: 180, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <TarotCardFront card={drawn.card} isReversed={drawn.isReversed} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="back"
+              className="w-[120px] h-[212px] rounded-lg relative overflow-hidden"
+              style={{
+                boxShadow: isNext
+                  ? '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4)'
+                  : '0 4px 15px rgba(0,0,0,0.4)',
+                border: isNext
+                  ? '2px solid rgba(212, 175, 55, 0.9)'
+                  : '1px solid rgba(212, 175, 55, 0.3)',
+                cursor: isNext ? 'pointer' : 'default',
+                opacity: isPending ? 0.4 : 1,
+                transition: 'opacity 0.3s, border 0.3s, box-shadow 0.3s',
+              }}
+              onClick={isNext ? drawNext : undefined}
+              whileHover={isNext ? { scale: 1.05, y: -8 } : {}}
+              whileTap={isNext ? { scale: 0.95 } : {}}
+            >
+              <div
+                className="absolute inset-[3px] rounded-md"
+                style={{
+                  backgroundImage: `url(${cardBackPattern})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  filter: isPending ? 'brightness(0.5)' : 'brightness(1)',
+                }}
+              />
+              {isNext && (
+                <motion.div
+                  className="absolute inset-0 rounded-lg"
+                  animate={{
+                    boxShadow: [
+                      'inset 0 0 20px rgba(212, 175, 55, 0.3)',
+                      'inset 0 0 40px rgba(212, 175, 55, 0.6)',
+                      'inset 0 0 20px rgba(212, 175, 55, 0.3)',
+                    ],
+                  }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
   return (
     <div className="relative min-h-screen py-8 px-4">
       <StarryBackground />
@@ -119,75 +200,37 @@ export default function SpreadDrawPage() {
           />
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          {Array.from({ length: config.cardCount }).map((_, i) => {
-            const drawn = drawnCards[i];
-            const isNext = i === currentIndex && allDrawn && !allComplete;
-            const isPending = i > currentIndex && allDrawn && !drawn;
-
-            return (
-              <div key={i} className="flex flex-col items-center gap-2">
-                <span className="text-xs text-purple-300">{config.positions[i]}</span>
-
-                <AnimatePresence mode="wait">
-                  {drawn ? (
-                    <motion.div
-                      key="front"
-                      initial={{ rotateY: 180, opacity: 0 }}
-                      animate={{ rotateY: 0, opacity: 1 }}
-                      transition={{ duration: 0.6 }}
-                      style={{ transformStyle: 'preserve-3d' }}
-                    >
-                      <TarotCardFront card={drawn.card} isReversed={drawn.isReversed} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="back"
-                      className="w-[120px] h-[212px] rounded-lg relative overflow-hidden"
-                      style={{
-                        boxShadow: isNext
-                          ? '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4)'
-                          : '0 4px 15px rgba(0,0,0,0.4)',
-                        border: isNext
-                          ? '2px solid rgba(212, 175, 55, 0.9)'
-                          : '1px solid rgba(212, 175, 55, 0.3)',
-                        cursor: isNext ? 'pointer' : 'default',
-                        opacity: isPending ? 0.4 : 1,
-                        transition: 'opacity 0.3s, border 0.3s, box-shadow 0.3s',
-                      }}
-                      onClick={isNext ? drawNext : undefined}
-                      whileHover={isNext ? { scale: 1.05, y: -8 } : {}}
-                      whileTap={isNext ? { scale: 0.95 } : {}}
-                    >
-                      <div
-                        className="absolute inset-[3px] rounded-md"
-                        style={{
-                          backgroundImage: `url(${cardBackPattern})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          filter: isPending ? 'brightness(0.5)' : 'brightness(1)',
-                        }}
-                      />
-                      {isNext && (
-                        <motion.div
-                          className="absolute inset-0 rounded-lg"
-                          animate={{
-                            boxShadow: [
-                              'inset 0 0 20px rgba(212, 175, 55, 0.3)',
-                              'inset 0 0 40px rgba(212, 175, 55, 0.6)',
-                              'inset 0 0 20px rgba(212, 175, 55, 0.3)',
-                            ],
-                          }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        />
-                      )}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-        </div>
+        {/* Card layout - cross or linear */}
+        {type === 'cross' ? (
+          <div
+            className="mb-8 mx-auto"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '140px 140px 140px',
+              gridTemplateRows: 'auto auto auto',
+              gridTemplateAreas: `
+                ". top ."
+                "left center right"
+                ". bottom ."
+              `,
+              gap: '12px',
+              justifyItems: 'center',
+              alignItems: 'center',
+              maxWidth: '460px',
+            }}
+          >
+            {/* Render in cross order: top(3), left(1), center(0), right(2), bottom(4) */}
+            {renderCard(3)}
+            {renderCard(1)}
+            {renderCard(0)}
+            {renderCard(2)}
+            {renderCard(4)}
+          </div>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {Array.from({ length: config.cardCount }).map((_, i) => renderCard(i))}
+          </div>
+        )}
 
         <div className="text-center">
           {!allDrawn && (
