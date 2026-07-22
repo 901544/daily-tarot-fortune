@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const inputPath = path.join(__dirname, '../src/images/paisley_bright_silver.png');
-const tempOutputPath = path.join(__dirname, '../src/images/cardback-compressed.webp');
+const inputPath = path.join(__dirname, '../public/images/pattern_bright_silver.png');
+const tempOutputPath = path.join(__dirname, '../public/images/cardback-compressed.webp');
 
 async function run() {
   const inputBuffer = fs.readFileSync(inputPath);

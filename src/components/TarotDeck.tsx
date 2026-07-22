@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+﻿import { motion, AnimatePresence } from 'framer-motion';
 import { useTarotStore } from '../stores/tarotStore';
 import { drawRandomCard } from '../data/tarotCards';
 import { generateInterpretationAI } from '../utils/interpreter';
@@ -15,11 +15,13 @@ export const TarotDeck = () => {
     reset();
     startDrawing();
     
+    const result = drawRandomCard();
+    const interpretationPromise = generateInterpretationAI(result.card, selectedZodiac, result.isReversed);
+    
     setTimeout(async () => {
-      const result = drawRandomCard();
-      const interpretation = await generateInterpretationAI(result.card, selectedZodiac, result.isReversed);
+      const interpretation = await interpretationPromise;
       drawCard(result.card, result.isReversed, interpretation);
-    }, 1500);
+    }, 800);
   };
 
   return (
@@ -36,7 +38,7 @@ export const TarotDeck = () => {
             className="relative z-10"
           >
             <motion.div 
-              className={`relative w-[200px] h-[280px] cursor-pointer ${
+              className={`relative w-[170px] h-[260px] cursor-pointer ${
                 selectedZodiac ? '' : 'opacity-50 cursor-not-allowed'
               }`}
               onClick={handleDrawCard}
@@ -48,7 +50,7 @@ export const TarotDeck = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="absolute w-[144px] h-[208px] rounded-lg"
+                    className="absolute w-[120px] h-[212px] rounded-lg"
                     style={{
                       bottom: `${offset * 2}px`,
                       right: `${offset * 2}px`,
@@ -103,7 +105,7 @@ export const TarotDeck = () => {
 
               {isDrawing && (
                 <motion.div
-                  className="absolute bottom-0 right-0 w-[144px] h-[208px] rounded-lg flex items-center justify-center z-20"
+                  className="absolute bottom-0 right-0 w-[120px] h-[212px] rounded-lg flex items-center justify-center z-20"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   style={{
@@ -137,7 +139,7 @@ export const TarotDeck = () => {
             <TarotCardFront card={drawnCard} isReversed={isReversed} />
             
             <motion.button
-              className="mt-6 w-36 px-6 py-2 rounded-lg text-white font-medium"
+              className="mt-6 px-6 py-2 rounded-lg text-white font-medium"
               style={{
                 background: 'linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%)',
                 boxShadow: '0 4px 15px rgba(155, 89, 182, 0.4)',

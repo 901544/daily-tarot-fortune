@@ -1,4 +1,4 @@
-import { TarotCard } from '../data/tarotCards';
+﻿import { TarotCard } from '../data/tarotCards';
 import { getTarotCardImageUrl, getTarotCardImageUrlFallback } from '../utils/tarotImages';
 
 interface TarotCardFrontProps {
@@ -11,18 +11,18 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
   const fallbackUrl = getTarotCardImageUrlFallback(card);
 
   return (
-    <div 
-      className="w-36 h-52 rounded-lg shadow-2xl flex flex-col overflow-hidden relative"
+    <div
+      className="w-[120px] h-[212px] rounded-lg shadow-2xl flex flex-col overflow-hidden relative"
       style={{
         background: 'linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
         border: `2px solid ${card.color}`,
       }}
     >
-      <div 
+      <div
         className="absolute top-0 left-0 right-0 h-1 z-20"
         style={{ backgroundColor: card.color }}
       />
-      
+
       <div className="flex-1 flex items-center justify-center overflow-hidden relative">
         <div style={{ transform: isReversed ? 'rotate(180deg)' : 'none', width: '100%', height: '100%' }}>
           {imageUrl ? (
@@ -40,9 +40,6 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
                     cardId: card.id,
                     imageUrl: imageUrl,
                     fallbackUrl: fallbackUrl,
-                    userAgent: navigator.userAgent,
-                    screenWidth: window.innerWidth,
-                    screenHeight: window.innerHeight,
                   });
                   target.style.display = 'none';
                 }}
@@ -55,13 +52,13 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
               />
             </picture>
           ) : (
-            <div 
+            <div
               className="w-full h-full flex items-center justify-center text-6xl text-white/50"
               style={{ backgroundColor: `${card.color}20` }}
             >
-              {card.type === 'major' ? '☽' : 
-               card.type === 'wands' ? '🔥' : 
-               card.type === 'cups' ? '💧' : 
+              {card.type === 'major' ? '☽' :
+               card.type === 'wands' ? '🔥' :
+               card.type === 'cups' ? '💧' :
                card.type === 'swords' ? '⚔️' : '⭐'}
             </div>
           )}
@@ -74,14 +71,14 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
       </div>
 
       {isReversed && (
-        <div 
+        <div
           className="absolute top-2 right-2 px-2 py-1 rounded text-xs font-bold text-red-400 bg-black/50 z-20"
         >
           逆位
         </div>
       )}
 
-      <div 
+      <div
         className="absolute inset-0 rounded-lg pointer-events-none z-30"
         style={{
           background: `radial-gradient(circle at 30% 30%, ${card.color}10 0%, transparent 50%)`,
