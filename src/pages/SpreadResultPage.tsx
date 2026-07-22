@@ -69,7 +69,7 @@ export default function SpreadResultPage() {
       const data = await response.json();
 
       if (response.ok && data.interpretation) {
-        setInterpretation(data.interpretation);
+        setInterpretation(data.interpretation.replace(/\*\*(.*?)\*\*/g, '\u300C$1\u300D'));
       } else {
         setInterpretation(generateLocalInterpretation());
       }
@@ -157,7 +157,7 @@ export default function SpreadResultPage() {
               <p className="text-purple-300 animate-pulse">正在解读牌面...</p>
             </div>
           ) : (
-            <div className="text-purple-100 leading-relaxed whitespace-pre-line text-sm">
+            <div className="text-purple-100 leading-relaxed whitespace-pre-line text-base">
               {interpretation}
             </div>
           )}
