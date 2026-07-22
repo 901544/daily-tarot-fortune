@@ -121,10 +121,10 @@ export default function SpreadDrawPage() {
               className="w-[120px] h-[212px] rounded-lg relative overflow-hidden"
               style={{
                 boxShadow: isNext
-                  ? '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4)'
+                  ? '0 0 30px rgba(220, 200, 150, 0.4), 0 0 40px rgba(220, 200, 150, 0.2)'
                   : '0 4px 15px rgba(0,0,0,0.4)',
                 border: isNext
-                  ? '2px solid rgba(212, 175, 55, 0.9)'
+                  ? '2px solid rgba(220, 205, 160, 0.6)'
                   : '1px solid rgba(212, 175, 55, 0.3)',
                 cursor: isNext ? 'pointer' : 'default',
                 opacity: isPending ? 0.4 : 1,
@@ -148,9 +148,9 @@ export default function SpreadDrawPage() {
                   className="absolute inset-0 rounded-lg"
                   animate={{
                     boxShadow: [
-                      'inset 0 0 20px rgba(212, 175, 55, 0.3)',
-                      'inset 0 0 40px rgba(212, 175, 55, 0.6)',
-                      'inset 0 0 20px rgba(212, 175, 55, 0.3)',
+                      'inset 0 0 20px rgba(220, 200, 150, 0.15)',
+                      'inset 0 0 40px rgba(220, 200, 150, 0.3)',
+                      'inset 0 0 20px rgba(220, 200, 150, 0.15)',
                     ],
                   }}
                   transition={{ duration: 1.5, repeat: Infinity }}

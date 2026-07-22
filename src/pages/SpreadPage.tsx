@@ -73,7 +73,7 @@ export default function SpreadPage() {
               textShadow: '0 0 30px rgba(232, 213, 183, 0.3)',
             }}
           >
-            🃏 牌阵解牌
+            ✨ 牌阵解牌
           </h1>
           <p className="text-purple-300">选择一种牌阵，开始你的解读之旅</p>
         </motion.header>
