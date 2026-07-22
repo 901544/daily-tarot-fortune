@@ -22,22 +22,23 @@ export const ZodiacCard = ({ zodiac, isSelected, onClick }: ZodiacCardProps) => 
 
   return (
     <motion.div
-      className={`relative w-28 h-36 cursor-pointer rounded-xl transition-all duration-300 ${
-        isSelected ? 'ring-2 ring-purple-400' : ''
+      style={isSelected ? {boxShadow: '0 0 0 2px var(--gold-glow)'} : undefined}
+          className={`relative w-28 h-36 cursor-pointer rounded-xl transition-all duration-300 ${
+        isSelected ? 'ring-2' : ''
       }`}
       onClick={onClick}
       whileHover={{ scale: 1.05, y: -5 }}
       animate={{
         boxShadow: isSelected 
-          ? '0 0 30px rgba(147, 51, 234, 0.6)' 
-          : '0 0 0 rgba(147, 51, 234, 0)',
+          ? '0 0 30px var(--glow-color)' 
+          : '0 0 0 transparent',
       }}
     >
       <div 
         className="absolute inset-0 rounded-xl overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
-          border: '1px solid rgba(212, 175, 55, 0.3)',
+          border: '1px solid var(--card-border)',
         }}
       >
         <div className="relative z-10 flex flex-col items-center h-full p-2 pt-1 pb-0">
@@ -51,7 +52,7 @@ export const ZodiacCard = ({ zodiac, isSelected, onClick }: ZodiacCardProps) => 
           
           <div style={{ transform: 'translateY(-5px)' }} className="flex flex-col items-center">
             <span className="text-white text-base font-medium">{zodiac.name}</span>
-            <span className="text-purple-300 text-xs">{zodiac.dateRange}</span>
+            <span className="text-xs" style={{color: 'var(--text-muted)'}}>{zodiac.dateRange}</span>
           </div>
         </div>
 

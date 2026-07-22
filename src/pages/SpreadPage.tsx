@@ -1,4 +1,4 @@
-﻿import { StarryBackground } from '../components/StarryBackground';
+import { StarryBackground } from '../components/StarryBackground';
 import { FloatingGlows } from '../components/FloatingGlow';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,8 @@ export default function SpreadPage() {
         >
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors"
+            className="flex items-center gap-2 transition-colors"
+            style={{color: 'var(--link-color)'}}
           >
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">返回首页</span>
@@ -64,18 +65,14 @@ export default function SpreadPage() {
           transition={{ duration: 0.6 }}
         >
           <h1
-            className="text-5xl font-bold mb-4"
+            className="text-5xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'ShangTuDongGuan, sans-serif',
-              background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 30px rgba(232, 213, 183, 0.3)',
+              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
             }}
           >
-            ✨ 牌阵解牌
+            <span style={{WebkitTextFillColor:'initial'}}>✨</span> 牌阵解牌
           </h1>
-          <p className="text-purple-300">选择一种牌阵，开始你的解读之旅</p>
+          <p style={{color: 'var(--text-secondary)'}}>选择一种牌阵，开始你的解读之旅</p>
         </motion.header>
 
         <div className="space-y-6">
@@ -91,27 +88,25 @@ export default function SpreadPage() {
               onClick={() => navigate(spread.path)}
             >
               <div
-                className="relative rounded-xl p-6 flex items-center gap-6 transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(45, 27, 78, 0.7) 0%, rgba(26, 15, 46, 0.85) 100%)',
-                  border: '1px solid rgba(212, 175, 55, 0.2)',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
-                }}
+                className="relative rounded-xl p-6 flex items-center gap-6 transition-all duration-300 theme-card"
               >
                 <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center text-3xl rounded-lg"
-                  style={{ background: 'rgba(212, 175, 55, 0.1)' }}
+                  style={{ background: 'var(--gold-accent)' }}
                 >
                   {spread.icon}
                 </div>
 
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1">
-                    <h2 className="text-xl font-bold text-white">{spread.title}</h2>
+                    <h2 className="text-xl font-bold" style={{
+                      color: 'var(--text-primary)',
+                      ...(spread.id === 'yes-no' ? {fontFamily: "Cinzel Decorative, serif"} : {})
+                    }}>{spread.title}</h2>
                     <span
                       className="text-xs px-2 py-0.5 rounded-full"
                       style={{
-                        background: 'rgba(155, 89, 182, 0.3)',
-                        color: 'rgba(232, 213, 183, 0.8)',
+                        background: 'var(--badge-bg)',
+                        color: 'var(--badge-text)',
                       }}
                     >
                       {spread.cardCount} 张牌
@@ -120,16 +115,16 @@ export default function SpreadPage() {
                   <p
                     className="text-xs mb-2"
                     style={{
-                      fontFamily: 'ShangTuDongGuan, sans-serif',
-                      color: 'rgba(232, 213, 183, 0.6)',
+                      fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+                      color: 'var(--highlight-text)',
                     }}
                   >
                     {spread.subtitle}
                   </p>
-                  <p className="text-purple-300 text-sm">{spread.description}</p>
+                  <p className="text-sm" style={{color: 'var(--text-secondary)'}}>{spread.description}</p>
                 </div>
 
-                <div className="flex-shrink-0 text-purple-500 group-hover:text-yellow-400 transition-colors">
+                <div className="flex-shrink-0 transition-colors" style={{color: 'var(--text-muted)'}}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -138,7 +133,7 @@ export default function SpreadPage() {
                 <div
                   className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%)',
+                    background: 'linear-gradient(135deg, var(--gold-accent) 0%, transparent 50%)',
                   }}
                 />
               </div>
@@ -147,7 +142,8 @@ export default function SpreadPage() {
         </div>
 
         <motion.footer
-          className="mt-16 text-center text-purple-400 text-sm"
+          className="mt-16 text-center text-sm"
+          style={{color: 'var(--footer-color)'}}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}

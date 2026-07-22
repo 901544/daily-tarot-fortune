@@ -123,7 +123,7 @@ export const TarotDeck = () => {
               )}
             </motion.div>
 
-            <p className="text-center mt-4 text-purple-200 text-sm">
+            <p className="text-center mt-4 text-sm" style={{color: 'var(--text-secondary)'}}>
               {selectedZodiac ? '点击牌堆抽取今日运势' : '请先选择你的星座'}
             </p>
           </motion.div>
@@ -148,8 +148,8 @@ export const TarotDeck = () => {
             <motion.button
               className="mt-6 px-6 py-2 rounded-lg text-white font-medium"
               style={{
-                background: 'linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%)',
-                boxShadow: '0 4px 15px rgba(155, 89, 182, 0.4)',
+                background: 'var(--btn-primary)',
+                boxShadow: 'var(--btn-primary-shadow)',
               }}
               onClick={reset}
               whileHover={{ scale: 1.05 }}

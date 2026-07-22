@@ -17,9 +17,9 @@ export const InterpretationResult = () => {
         <div 
           className="rounded-xl p-6 relative overflow-hidden"
           style={{
-            background: 'linear-gradient(145deg, rgba(45, 27, 78, 0.8) 0%, rgba(26, 15, 46, 0.9) 100%)',
-            border: '1px solid rgba(212, 175, 55, 0.3)',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(147, 51, 234, 0.2)',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            boxShadow: 'var(--card-shadow)',
           }}
         >
           <div 
@@ -36,7 +36,7 @@ export const InterpretationResult = () => {
             </div>
             <div>
               <h3 className="text-white font-bold text-lg">{selectedZodiac.name}</h3>
-              <p className="text-purple-300 text-sm">{selectedZodiac.dateRange}</p>
+              <p className="text-sm" style={{color: 'var(--text-muted)'}}>{selectedZodiac.dateRange}</p>
             </div>
           </div>
 
@@ -62,7 +62,7 @@ export const InterpretationResult = () => {
           </div>
 
           <div className="relative">
-            <div className="text-purple-200 text-left leading-relaxed">
+            <div className="text-left leading-relaxed" style={{color: 'var(--text-primary)'}}>
               <p className="text-lg">{interpretation}</p>
             </div>
           </div>

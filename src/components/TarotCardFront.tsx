@@ -56,7 +56,7 @@ export const TarotCardFront = ({ card, isReversed = false }: TarotCardFrontProps
 
       <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent z-20">
         <h3 className="text-white font-bold text-sm text-center">{card.name}</h3>
-        <p className="text-purple-300 text-xs text-center">{card.nameEn}</p>
+        <p className="text-xs text-center" style={{color: 'var(--text-muted)'}}>{card.nameEn}</p>
       </div>
 
       {isReversed && (

@@ -42,7 +42,12 @@ export const StarryBackground = () => {
 
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200, 180, 255, ${star.opacity})`;
+        const isIvory = document.documentElement.getAttribute('data-theme') === 'ivory';
+        const r = isIvory ? 180 : 200;
+        const g = isIvory ? 150 : 180;
+        const b = isIvory ? 80 : 255;
+        const baseOp = isIvory ? 0.25 : 1;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${star.opacity * baseOp})`;
         ctx.fill();
       });
 

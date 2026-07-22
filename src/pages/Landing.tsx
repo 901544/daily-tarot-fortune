@@ -1,6 +1,7 @@
-﻿import { StarryBackground } from '../components/StarryBackground';
+import { StarryBackground } from '../components/StarryBackground';
 import { FloatingGlows } from '../components/FloatingGlow';
 import { motion } from 'framer-motion';
+import ThemeSwitcher from '../components/ThemeSwitcher';
 import { useNavigate } from 'react-router-dom';
 
 export default function Landing() {
@@ -31,6 +32,7 @@ export default function Landing() {
       <FloatingGlows />
 
       <div className="relative z-10 max-w-4xl mx-auto flex-1 flex flex-col justify-center">
+        <div className="absolute top-0 right-0"><ThemeSwitcher /></div>
         <motion.header
           className="text-center mb-16"
           initial={{ opacity: 0, y: -30 }}
@@ -38,24 +40,20 @@ export default function Landing() {
           transition={{ duration: 0.8 }}
         >
           <h1
-            className="text-6xl font-bold mb-4"
+            className="text-6xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'ShangTuDongGuan, sans-serif',
-              background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 30px rgba(232, 213, 183, 0.3)',
+              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
             }}
           >
-            ✨ Daily Tarot ✨
+            <span className="silver-emoji">✦</span> Daily Tarot <span className="silver-emoji">✦</span>
           </h1>
           <p
-            className="text-lg"
+            className="text-lg theme-title"
             style={{
-              fontFamily: 'ShangTuDongGuan, sans-serif',
-              background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              lineHeight: '2.0',
+              paddingTop: '0.3em',
+              overflow: 'visible',
             }}
           >
             Let the cards guide your path
@@ -75,35 +73,30 @@ export default function Landing() {
               className="cursor-pointer group"
             >
               <div
-                className="relative rounded-2xl p-8 h-full flex flex-col items-center text-center transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(45, 27, 78, 0.8) 0%, rgba(26, 15, 46, 0.9) 100%)',
-                  border: '1px solid rgba(212, 175, 55, 0.3)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                }}
+                className="relative rounded-2xl p-8 h-full flex flex-col items-center text-center transition-all duration-300 theme-card"
               >
                 {/* 顶部光效 */}
                 <div
                   className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
-                  style={{ background: 'linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.8), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, transparent, var(--gold-glow), transparent)' }}
                 />
 
                 <span className="text-6xl mb-6">{mod.icon}</span>
 
-                <h2 className="text-2xl font-bold text-white mb-1">{mod.title}</h2>
+                <h2 className="text-2xl font-bold mb-1" style={{color: 'var(--text-primary)'}}>{mod.title}</h2>
                 <p
                   className="text-sm mb-4"
                   style={{
-                    fontFamily: 'ShangTuDongGuan, sans-serif',
-                    color: 'rgba(232, 213, 183, 0.7)',
+                    fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+                    color: 'var(--highlight-text)',
                   }}
                 >
                   {mod.subtitle}
                 </p>
-                <p className="text-purple-300 text-sm">{mod.description}</p>
+                <p className="text-sm" style={{color: 'var(--text-secondary)'}}>{mod.description}</p>
 
                 {/* 底部箭头 */}
-                <div className="mt-6 text-purple-400 group-hover:text-yellow-400 transition-colors">
+                <div className="mt-6 transition-colors" style={{color: 'var(--text-muted)'}}>
                   <svg className="w-6 h-6 mx-auto animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
@@ -114,13 +107,14 @@ export default function Landing() {
         </div>
 
         <motion.footer
-          className="mt-16 text-center text-purple-400 text-sm"
+          className="mt-16 text-center text-sm"
+          style={{color: 'var(--footer-color)'}}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
           <p>塔罗牌仅供娱乐，请以积极心态面对每一天</p>
-          <p className="mt-2 text-purple-500/60">~ 愿星辰指引你的道路 ~</p>
+          <p className="mt-2" style={{opacity: 0.6}}>~ 愿星辰指引你的道路 ~</p>
         </motion.footer>
       </div>
     </div>

@@ -1,4 +1,4 @@
-﻿import { StarryBackground } from '../components/StarryBackground';
+import { StarryBackground } from '../components/StarryBackground';
 import { FloatingGlows } from '../components/FloatingGlow';
 import { TarotDeck } from '../components/TarotDeck';
 import { InterpretationResult } from '../components/InterpretationResult';
@@ -29,7 +29,8 @@ export default function DrawPage() {
         >
           <button
             onClick={() => navigate('/daily')}
-            className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors"
+            className="flex items-center gap-2 transition-colors"
+            style={{color: 'var(--link-color)'}}
           >
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm">返回选择星座</span>
@@ -38,20 +39,16 @@ export default function DrawPage() {
 
         <header className="text-center mb-8">
           <h1 
-            className="text-4xl font-bold mb-4"
+            className="text-4xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'ShangTuDongGuan, sans-serif',
-              background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 30px rgba(232, 213, 183, 0.3)',
+              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
             }}
           >
-            ✨ Daily Tarot ✨
+            <span className="silver-emoji">✦</span> Daily Tarot <span className="silver-emoji">✦</span>
           </h1>
           <div className="flex items-center justify-center gap-3">
             <span className="text-3xl">{selectedZodiac.symbol}</span>
-            <span className="text-purple-200 text-lg">{selectedZodiac.name}</span>
+            <span className="text-lg" style={{color: 'var(--text-secondary)'}}>{selectedZodiac.name}</span>
           </div>
         </header>
 
@@ -60,9 +57,9 @@ export default function DrawPage() {
           <InterpretationResult />
         </main>
 
-        <footer className="mt-16 text-center text-purple-400 text-sm">
+        <footer className="mt-16 text-center text-sm" style={{color: 'var(--footer-color)'}}>
           <p>塔罗牌仅供娱乐，请以积极心态面对每一天</p>
-          <p className="mt-2 text-purple-500/60">~ 愿星辰指引你的道路 ~</p>
+          <p className="mt-2" style={{opacity: 0.6}}>~ 愿星辰指引你的道路 ~</p>
         </footer>
       </div>
     </div>

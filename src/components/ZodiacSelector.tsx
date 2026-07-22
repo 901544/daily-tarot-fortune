@@ -10,9 +10,9 @@ export const ZodiacSelector = () => {
       <h2 
         className="text-2xl font-bold text-center mb-8"
         style={{
-          fontFamily: 'ShangTuDongGuan, sans-serif',
-          color: '#F5F5F5',
-          textShadow: '0 0 20px rgba(245, 245, 245, 0.3)',
+          fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+          color: 'var(--text-primary)',
+          textShadow: 'var(--title-shadow)',
         }}
       >
         选择你的星座
