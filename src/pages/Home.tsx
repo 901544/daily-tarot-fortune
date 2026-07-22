@@ -1,4 +1,4 @@
-import { StarryBackground } from '../components/StarryBackground';
+﻿import { StarryBackground } from '../components/StarryBackground';
 import { FloatingGlows } from '../components/FloatingGlow';
 import { ZodiacSelector } from '../components/ZodiacSelector';
 import { useTarotStore } from '../stores/tarotStore';
@@ -12,7 +12,7 @@ export default function Home() {
 
   const handleContinue = () => {
     if (selectedZodiac) {
-      navigate('/draw');
+      navigate('/daily/draw');
     }
   };
 
@@ -26,7 +26,7 @@ export default function Home() {
           <h1 
             className="text-6xl font-bold mb-4"
             style={{
-              fontFamily: 'Dancing Script, cursive',
+              fontFamily: 'ShangTuDongGuan, sans-serif',
               background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -38,7 +38,7 @@ export default function Home() {
           <p 
             className="text-lg"
             style={{
-              fontFamily: 'Dancing Script, cursive',
+              fontFamily: 'ShangTuDongGuan, sans-serif',
               background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',

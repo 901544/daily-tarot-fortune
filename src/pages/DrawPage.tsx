@@ -1,4 +1,4 @@
-import { StarryBackground } from '../components/StarryBackground';
+﻿import { StarryBackground } from '../components/StarryBackground';
 import { FloatingGlows } from '../components/FloatingGlow';
 import { TarotDeck } from '../components/TarotDeck';
 import { InterpretationResult } from '../components/InterpretationResult';
@@ -12,7 +12,7 @@ export default function DrawPage() {
   const navigate = useNavigate();
 
   if (!selectedZodiac) {
-    navigate('/');
+    navigate('/daily');
     return null;
   }
 
@@ -28,7 +28,7 @@ export default function DrawPage() {
           className="mb-8"
         >
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/daily')}
             className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -40,7 +40,7 @@ export default function DrawPage() {
           <h1 
             className="text-4xl font-bold mb-4"
             style={{
-              fontFamily: 'Dancing Script, cursive',
+              fontFamily: 'ShangTuDongGuan, sans-serif',
               background: 'linear-gradient(135deg, #E8D5B7 0%, #F5E6C8 50%, #E8D5B7 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
