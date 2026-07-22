@@ -69,7 +69,7 @@ export default function SpreadResultPage() {
       const data = await response.json();
 
       if (response.ok && data.interpretation) {
-        setInterpretation(data.interpretation.replace(/\*\*(.*?)\*\*/g, '\u300C$1\u300D'));
+        setInterpretation(data.interpretation.replace(/\*\*(.*?)\*\*/g, '\u300C$1\u300D').replace(/^#+\s*/gm, ''));
       } else {
         setInterpretation(generateLocalInterpretation());
       }
