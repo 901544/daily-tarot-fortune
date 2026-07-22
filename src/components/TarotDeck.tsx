@@ -4,8 +4,7 @@ import { drawRandomCard } from '../data/tarotCards';
 import { generateInterpretationAI } from '../utils/interpreter';
 import { CardTable } from './CardTable';
 import { TarotCardFront } from './TarotCardFront';
-const patternBrightSilver = '/images/pattern_bright_silver.webp';
-const patternBrightSilverFallback = '/images/pattern_bright_silver.png';
+import { cardBackPattern } from '../assets/cardBack';
 
 export const TarotDeck = () => {
   const { selectedZodiac, drawnCard, isReversed, isDrawing, drawCard, startDrawing, reset } = useTarotStore();
@@ -89,30 +88,14 @@ export const TarotDeck = () => {
                         }}
                       />
                       
-                      <picture>
-                        <source srcSet={patternBrightSilver} type="image/webp" />
-                        <img
-                          src={patternBrightSilverFallback}
-                          alt="牌背"
-                          className="absolute inset-[4px] w-[calc(100%-8px)] h-[calc(100%-8px)] rounded-md object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            console.error('[牌背图片加载失败]', {
-                              imageUrl: patternBrightSilver,
-                              fallbackUrl: patternBrightSilverFallback,
-                              userAgent: navigator.userAgent,
-                              screenWidth: window.innerWidth,
-                              screenHeight: window.innerHeight,
-                            });
-                            target.style.display = 'none';
-                          }}
-                          onLoad={() => {
-                            console.log('[牌背图片加载成功]', {
-                              imageUrl: patternBrightSilver,
-                            });
-                          }}
-                        />
-                      </picture>
+                      <div
+                        className="absolute inset-[4px] w-[calc(100%-8px)] h-[calc(100%-8px)] rounded-md"
+                        style={{
+                          backgroundImage: `url(${cardBackPattern})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                        }}
+                      />
                     </div>
                   </motion.div>
                 );

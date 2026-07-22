@@ -4,7 +4,10 @@ import { ZodiacSign } from '../data/zodiacSigns';
 const AI_API_URL = import.meta.env.VITE_AI_API_URL || '';
 
 export const generateInterpretationAI = async (card: TarotCard, zodiac: ZodiacSign, isReversed: boolean): Promise<string> => {
+  console.log('[AI解牌] 开始调用', { AI_API_URL, cardName: card.name, zodiacName: zodiac.name, isReversed });
+  
   if (!AI_API_URL) {
+    console.log('[AI解牌] 环境变量为空，使用本地解牌');
     return generateInterpretation(card, zodiac, isReversed);
   }
 
@@ -18,15 +21,17 @@ export const generateInterpretationAI = async (card: TarotCard, zodiac: ZodiacSi
     });
 
     const data = await response.json();
+    console.log('[AI解牌] API返回', { status: response.status, ok: response.ok, hasInterpretation: !!data.interpretation });
 
     if (response.ok && data.interpretation) {
+      console.log('[AI解牌] 成功，使用AI解读');
       return data.interpretation;
     }
 
-    console.warn('AI interpretation failed, falling back to local', data);
+    console.warn('[AI解牌] 失败，回退到本地', { status: response.status, error: data.error });
     return generateInterpretation(card, zodiac, isReversed);
   } catch (error) {
-    console.warn('AI API error, falling back to local', error);
+    console.error('[AI解牌] 请求异常', error);
     return generateInterpretation(card, zodiac, isReversed);
   }
 };
