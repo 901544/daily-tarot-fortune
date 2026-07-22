@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTarotStore } from '../stores/tarotStore';
 import { drawRandomCard } from '../data/tarotCards';
-import { generateInterpretation } from '../utils/interpreter';
+import { generateInterpretationAI } from '../utils/interpreter';
 import { CardTable } from './CardTable';
 import { TarotCardFront } from './TarotCardFront';
 const patternBrightSilver = '/images/pattern_bright_silver.webp';
@@ -10,15 +10,15 @@ const patternBrightSilverFallback = '/images/pattern_bright_silver.png';
 export const TarotDeck = () => {
   const { selectedZodiac, drawnCard, isReversed, isDrawing, drawCard, startDrawing, reset } = useTarotStore();
 
-  const handleDrawCard = () => {
+  const handleDrawCard = async () => {
     if (!selectedZodiac || isDrawing || drawnCard) return;
     
     reset();
     startDrawing();
     
-    setTimeout(() => {
+    setTimeout(async () => {
       const result = drawRandomCard();
-      const interpretation = generateInterpretation(result.card, selectedZodiac, result.isReversed);
+      const interpretation = await generateInterpretationAI(result.card, selectedZodiac, result.isReversed);
       drawCard(result.card, result.isReversed, interpretation);
     }, 1500);
   };

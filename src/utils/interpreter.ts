@@ -1,6 +1,36 @@
 import { TarotCard } from '../data/tarotCards';
 import { ZodiacSign } from '../data/zodiacSigns';
 
+const AI_API_URL = import.meta.env.VITE_AI_API_URL || '';
+
+export const generateInterpretationAI = async (card: TarotCard, zodiac: ZodiacSign, isReversed: boolean): Promise<string> => {
+  if (!AI_API_URL) {
+    return generateInterpretation(card, zodiac, isReversed);
+  }
+
+  try {
+    const response = await fetch(AI_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ card, zodiac, isReversed }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.interpretation) {
+      return data.interpretation;
+    }
+
+    console.warn('AI interpretation failed, falling back to local', data);
+    return generateInterpretation(card, zodiac, isReversed);
+  } catch (error) {
+    console.warn('AI API error, falling back to local', error);
+    return generateInterpretation(card, zodiac, isReversed);
+  }
+};
+
 const elementMessages: Record<string, string[]> = {
   fire: ['热情与行动力将成为你的助力，今天适合主动出击', '你的活力正被宇宙点燃，勇敢追求心中所想', '勇敢展现你的热情本色，让光芒照亮前行的道路'],
   water: ['内心的情感将指引你前行，倾听直觉的声音', '温柔的力量正在觉醒，用爱与关怀对待自己', '倾听内心深处的声音，那里藏着最真实的答案'],
