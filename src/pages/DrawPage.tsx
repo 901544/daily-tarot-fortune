@@ -41,14 +41,14 @@ export default function DrawPage() {
           <h1 
             className="text-4xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
             }}
           >
             <span className="silver-emoji">✦</span> Daily Tarot <span className="silver-emoji">✦</span>
           </h1>
           <div className="flex items-center justify-center gap-3">
             <span className="text-3xl">{selectedZodiac.symbol}</span>
-            <span className="text-lg" style={{color: 'var(--text-secondary)'}}>{selectedZodiac.name}</span>
+            <span className="text-lg silver-text" style={{color: 'var(--text-secondary)'}}>{selectedZodiac.name}</span>
           </div>
         </header>
 

@@ -137,7 +137,7 @@ export default function SpreadDrawPage() {
               <div
                 className="absolute inset-[3px] rounded-md"
                 style={{
-                  backgroundImage: `url(\${cardBackPattern})`,
+                  backgroundImage: `url(${cardBackPattern})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   filter: isPending ? 'brightness(0.5)' : 'brightness(1)',

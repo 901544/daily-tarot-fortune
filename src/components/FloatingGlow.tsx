@@ -15,8 +15,8 @@ export const FloatingGlow = ({ delay, size, top, left, color }: FloatingGlowProp
       style={{
         top,
         left,
-        width: size,
-        height: size,
+        width: `calc(${size}px * var(--float-scale, 1))`,
+        height: `calc(${size}px * var(--float-scale, 1))`,
         background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
         filter: 'blur(40px)',
       }}

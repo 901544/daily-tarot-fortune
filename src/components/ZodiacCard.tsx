@@ -51,8 +51,8 @@ export const ZodiacCard = ({ zodiac, isSelected, onClick }: ZodiacCardProps) => 
           </div>
           
           <div style={{ transform: 'translateY(-5px)' }} className="flex flex-col items-center">
-            <span className="text-white text-base font-medium">{zodiac.name}</span>
-            <span className="text-xs" style={{color: 'var(--text-muted)'}}>{zodiac.dateRange}</span>
+            <span className="text-base font-medium" style={{color: 'var(--text-primary)'}}>{zodiac.name}</span>
+            <span className="text-xs font-bold" style={{color: 'var(--text-secondary)'}}>{zodiac.dateRange}</span>
           </div>
         </div>
 
@@ -62,7 +62,7 @@ export const ZodiacCard = ({ zodiac, isSelected, onClick }: ZodiacCardProps) => 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             style={{
-              background: 'radial-gradient(circle at center, rgba(147, 51, 234, 0.2) 0%, transparent 70%)',
+              background: 'radial-gradient(circle at center, var(--glow-color) 0%, transparent 70%)',
             }}
           />
         )}

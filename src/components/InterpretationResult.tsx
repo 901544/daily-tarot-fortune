@@ -35,7 +35,7 @@ export const InterpretationResult = () => {
               {selectedZodiac.symbol}
             </div>
             <div>
-              <h3 className="text-white font-bold text-lg">{selectedZodiac.name}</h3>
+              <h3 className="font-bold text-lg" style={{color: 'var(--text-primary)'}}>{selectedZodiac.name}</h3>
               <p className="text-sm" style={{color: 'var(--text-muted)'}}>{selectedZodiac.dateRange}</p>
             </div>
           </div>
@@ -49,7 +49,7 @@ export const InterpretationResult = () => {
               {drawnCard.keywords.map((keyword, index) => (
                 <span 
                   key={index}
-                  className="text-xs px-3 py-1 rounded-full"
+                  className="text-xs px-3 py-1 rounded-full silver-text"
                   style={{ 
                     backgroundColor: `${drawnCard.color}30`,
                     color: drawnCard.color,

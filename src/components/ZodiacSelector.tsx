@@ -10,7 +10,7 @@ export const ZodiacSelector = () => {
       <h2 
         className="text-2xl font-bold text-center mb-8"
         style={{
-          fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+          fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
           color: 'var(--text-primary)',
           textShadow: 'var(--title-shadow)',
         }}

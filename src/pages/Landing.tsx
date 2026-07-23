@@ -42,7 +42,7 @@ export default function Landing() {
           <h1
             className="text-6xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
             }}
           >
             <span className="silver-emoji">✦</span> Daily Tarot <span className="silver-emoji">✦</span>
@@ -50,7 +50,7 @@ export default function Landing() {
           <p
             className="text-lg theme-title"
             style={{
-              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
               lineHeight: '2.0',
               paddingTop: '0.3em',
               overflow: 'visible',
@@ -87,7 +87,7 @@ export default function Landing() {
                 <p
                   className="text-sm mb-4"
                   style={{
-                    fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+                    fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
                     color: 'var(--highlight-text)',
                   }}
                 >

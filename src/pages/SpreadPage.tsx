@@ -67,7 +67,7 @@ export default function SpreadPage() {
           <h1
             className="text-5xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
             }}
           >
             <span style={{WebkitTextFillColor:'initial'}}>✨</span> 牌阵解牌
@@ -115,7 +115,7 @@ export default function SpreadPage() {
                   <p
                     className="text-xs mb-2"
                     style={{
-                      fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+                      fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
                       color: 'var(--highlight-text)',
                     }}
                   >

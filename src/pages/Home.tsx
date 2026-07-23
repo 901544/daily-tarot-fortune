@@ -3,7 +3,7 @@ import { FloatingGlows } from '../components/FloatingGlow';
 import { ZodiacSelector } from '../components/ZodiacSelector';
 import { useTarotStore } from '../stores/tarotStore';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
@@ -22,11 +22,18 @@ export default function Home() {
       <FloatingGlows />
       
       <div className="relative z-10 max-w-6xl mx-auto">
+        <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} className="mb-6">
+          <button onClick={() => navigate('/')} className="flex items-center gap-2 transition-colors" style={{color: 'var(--link-color)'}}>
+            <ArrowLeft className="w-5 h-5" />
+            <span className="text-sm">返回首页</span>
+          </button>
+        </motion.div>
+
         <header className="text-center mb-12">
           <h1 
             className="text-6xl font-bold mb-4 theme-title"
             style={{
-              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
             }}
           >
             <span className="silver-emoji">✦</span> Daily Tarot <span className="silver-emoji">✦</span>
@@ -34,7 +41,7 @@ export default function Home() {
           <p 
             className="text-lg theme-title"
             style={{
-              fontFamily: 'Great Vibes, ShangTuDongGuan, cursive',
+              fontFamily: 'Great Vibes, Huiwen Mincho, Microsoft YaHei, sans-serif',
               lineHeight: '2.0',
               paddingTop: '0.3em',
               overflow: 'visible',
